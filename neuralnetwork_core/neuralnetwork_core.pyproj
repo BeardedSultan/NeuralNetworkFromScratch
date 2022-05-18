@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>d53e6dd0-b0f2-4fdd-ad1f-8310ce11b1be</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>neuralnetwork_core.py</StartupFile>
+    <StartupFile>categoricalcrossentropy.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,6 +21,10 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="categoricalcrossentropy.py" />
+    <Compile Include="softmax.py" />
+    <Compile Include="spiraldataset.py" />
+    <Compile Include="simpleReLU.py" />
     <Compile Include="neuralnetwork_core.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
