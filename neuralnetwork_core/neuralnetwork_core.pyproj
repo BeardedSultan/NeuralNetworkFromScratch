@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>d53e6dd0-b0f2-4fdd-ad1f-8310ce11b1be</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>categoricalcrossentropy.py</StartupFile>
+    <StartupFile>spiraldataset.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>

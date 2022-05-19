@@ -47,18 +47,51 @@ class Activation_Softmax:
         self.output = probabilities
 
 
+#LOSS_CALCULTAION#
+class Loss:
+    def calculate(self, output, y): #y is intended target values
+        sample_losses = self.forward(output, y)
+        data_loss = np.mean(sample_losses)
+        return data_loss
+
+class Loss_CategoricalCrossentropy(Loss):
+    def forward(self, y_pred, y_true):
+        samples = len(y_pred)
+        y_pred_clipped = np.clip(y_pred, 1e-7, 1-1e-7)
+
+        if len(y_true.shape) == 1:
+            correct_confidences = y_pred_clipped[range(samples), y_true]
+        elif len(y_true.shape) == 2:
+            correct_confidences = np.sum(y_pred_clipped * y_true, axis=1)
+
+        neg_log = -np.log(correct_confidences)
+        return neg_log
+
+
+#ACCURACY_CALCULATION#
+class Accuracy(Loss):
+    def forward(self, outputs, class_targets):
+        predictions = np.argmax(outputs, axis=1)
+        accuracy = np.mean(predictions == class_targets)
+        return accuracy
+
+
 X, y = spiral_data(samples=100, classes=3)
 
 dense1 = Layer_Dense(2, 3) #2 input features cause x, y data
 activation1 = Activation_ReLU()
-
 dense1.forward(X)
 activation1.forward(dense1.output)
 
 dense2 = Layer_Dense(3, 3)
 activation2 = Activation_Softmax()
-
 dense2.forward(activation1.output)
 activation2.forward(dense2.output)
 
-print(activation2.output)
+loss_function = Loss_CategoricalCrossentropy()
+loss = loss_function.calculate(activation2.output, y)
+accuracy_function = Accuracy()
+acc = accuracy_function.calculate(activation2.output, y)
+
+print("Loss: ", loss)
+print("Acc: ", acc)
